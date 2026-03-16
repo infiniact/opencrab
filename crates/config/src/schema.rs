@@ -41,9 +41,20 @@ impl Default for GatewayConfig {
 /// Agent / LLM configuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct AgentConfig {
+    /// Provider name: "openai", "anthropic", "deepseek", "ollama", "groq",
+    /// "gemini", "perplexity", "moonshot", "xai", "openrouter", "mistral",
+    /// "together", "cohere", "huggingface", "hyperbolic", "mira", "galadriel",
+    /// "azure", or "openai-compatible" for any OpenAI-compatible endpoint.
     pub provider: String,
     pub model: String,
+    /// API key. Use "" or omit for providers that don't require auth (e.g. ollama).
+    #[serde(default)]
     pub api_key: String,
+    /// Custom API base URL. Overrides the provider's default endpoint.
+    /// Required for "openai-compatible" provider.
+    pub base_url: Option<String>,
+    /// API version (used by Azure OpenAI).
+    pub api_version: Option<String>,
     pub temperature: Option<f64>,
     pub max_tokens: Option<u32>,
     pub system_prompt: Option<String>,

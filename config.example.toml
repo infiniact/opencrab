@@ -4,12 +4,121 @@ port = 18789
 auth_token = ""           # empty = loopback-only, no auth required
 
 [agent]
-provider = "openai"       # "openai" | "anthropic"
+provider = "openai"       # See supported providers below
 model = "gpt-4o"
 api_key = "${OPENAI_API_KEY}"
+# base_url = ""           # Optional: override provider's default API endpoint
+# api_version = ""        # Optional: API version (used by Azure)
 temperature = 0.7
 max_tokens = 4096
 system_prompt = "You are a helpful assistant."
+
+# ─── Provider examples (uncomment one) ──────────────────────────────────
+#
+# --- OpenAI (default, uses Responses API) ---
+# provider = "openai"
+# model = "gpt-4o"
+# api_key = "${OPENAI_API_KEY}"
+#
+# --- OpenAI-compatible (any endpoint that speaks the OpenAI Completions API) ---
+# provider = "openai-compatible"
+# model = "your-model-name"
+# api_key = "${API_KEY}"         # use "" if the endpoint needs no auth
+# base_url = "http://localhost:8000/v1"
+#
+# --- Anthropic ---
+# provider = "anthropic"
+# model = "claude-sonnet-4-20250514"
+# api_key = "${ANTHROPIC_API_KEY}"
+#
+# --- DeepSeek ---
+# provider = "deepseek"
+# model = "deepseek-chat"
+# api_key = "${DEEPSEEK_API_KEY}"
+#
+# --- Ollama (local, no API key needed) ---
+# provider = "ollama"
+# model = "qwen2.5:14b"
+# api_key = ""
+# base_url = "http://localhost:11434"   # default Ollama address
+#
+# --- Groq ---
+# provider = "groq"
+# model = "llama-3.1-8b-instant"
+# api_key = "${GROQ_API_KEY}"
+#
+# --- Google Gemini ---
+# provider = "gemini"
+# model = "gemini-2.0-flash"
+# api_key = "${GEMINI_API_KEY}"
+#
+# --- Perplexity ---
+# provider = "perplexity"
+# model = "sonar"
+# api_key = "${PERPLEXITY_API_KEY}"
+#
+# --- Moonshot (Kimi) ---
+# provider = "moonshot"
+# model = "moonshot-v1-8k"
+# api_key = "${MOONSHOT_API_KEY}"
+#
+# --- xAI (Grok) ---
+# provider = "xai"
+# model = "grok-3"
+# api_key = "${XAI_API_KEY}"
+#
+# --- OpenRouter ---
+# provider = "openrouter"
+# model = "openai/gpt-4o"
+# api_key = "${OPENROUTER_API_KEY}"
+#
+# --- Mistral ---
+# provider = "mistral"
+# model = "mistral-large-latest"
+# api_key = "${MISTRAL_API_KEY}"
+#
+# --- Together ---
+# provider = "together"
+# model = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+# api_key = "${TOGETHER_API_KEY}"
+#
+# --- Azure OpenAI ---
+# provider = "azure"
+# model = "gpt-4o"
+# api_key = "${AZURE_OPENAI_API_KEY}"
+# base_url = "https://your-resource.openai.azure.com/"
+# api_version = "2024-10-21"
+#
+# --- Cohere ---
+# provider = "cohere"
+# model = "command-r-plus"
+# api_key = "${COHERE_API_KEY}"
+#
+# --- HuggingFace ---
+# provider = "huggingface"
+# model = "meta-llama/Llama-3.1-8B-Instruct"
+# api_key = "${HF_API_KEY}"
+#
+# --- 智谱 AI (Zhipu / GLM) ---
+# provider = "zhipu"
+# model = "glm-4-flash"
+# api_key = "${ZHIPUAI_API_KEY}"
+#
+# --- 智谱 Code (CodeGeeX) ---
+# provider = "zhipu-code"
+# model = "codegeex-4"
+# api_key = "${ZHIPUAI_API_KEY}"
+#
+# --- 智谱海外 (Z.AI) ---
+# provider = "zhipu-overseas"
+# model = "glm-4-flash"
+# api_key = "${ZAI_API_KEY}"
+#
+# --- 智谱海外 Code ---
+# provider = "zhipu-overseas-code"
+# model = "codegeex-4"
+# api_key = "${ZAI_API_KEY}"
+# ────────────────────────────────────────────────────────────────────────
 
 [channels.feishu]
 enabled = true

@@ -77,7 +77,11 @@ enum ConfigCmd {
 #[derive(Subcommand)]
 enum ChannelsCmd {
     /// Show channel connection status.
-    Status,
+    Status {
+        /// Gateway port to connect to (overrides config).
+        #[arg(long)]
+        port: Option<u16>,
+    },
 }
 
 #[tokio::main]
@@ -105,8 +109,8 @@ async fn main() -> Result<()> {
         },
 
         Commands::Channels { cmd } => match cmd {
-            ChannelsCmd::Status => {
-                run_channels_status().await?;
+            ChannelsCmd::Status { port } => {
+                run_channels_status(port).await?;
             }
         },
     }
@@ -152,12 +156,13 @@ async fn run_config_get(key: Option<&str>) -> Result<()> {
 }
 
 /// Show channel status by connecting to running gateway.
-async fn run_channels_status() -> Result<()> {
+async fn run_channels_status(port_override: Option<u16>) -> Result<()> {
     use futures::StreamExt;
     use tokio_tungstenite::tungstenite::Message;
 
     let config = load_config(None)?;
-    let ws_url = format!("ws://{}:{}/ws", config.gateway.host, config.gateway.port);
+    let port = port_override.unwrap_or(config.gateway.port);
+    let ws_url = format!("ws://{}:{}/ws", config.gateway.host, port);
 
     let (mut ws, _) = tokio_tungstenite::connect_async(&ws_url)
         .await
