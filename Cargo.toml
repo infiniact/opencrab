@@ -1,0 +1,43 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/gateway",
+    "crates/agent",
+    "crates/channels",
+    "crates/config",
+    "crates/cli",
+    "crates/protocol",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[workspace.dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = "0.8"
+tokio-tungstenite = "0.26"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+rig-core = "0.31"
+reqwest = { version = "0.13", features = ["json", "rustls", "charset", "http2"], default-features = false }
+clap = { version = "4", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+anyhow = "1"
+thiserror = "2"
+schemars = { version = "1", features = ["derive"] }
+futures = "0.3"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+async-trait = "0.1"
+regex = "1"
+
+# Internal crates
+opencrab-protocol = { path = "crates/protocol" }
+opencrab-config = { path = "crates/config" }
+opencrab-agent = { path = "crates/agent" }
+opencrab-channels = { path = "crates/channels" }
+opencrab-gateway = { path = "crates/gateway" }

@@ -1,0 +1,26 @@
+[package]
+name = "opencrab-cli"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "opencrab"
+path = "src/main.rs"
+
+[dependencies]
+opencrab-config = { workspace = true }
+opencrab-protocol = { workspace = true }
+opencrab-agent = { workspace = true }
+opencrab-channels = { workspace = true }
+tokio = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+futures = { workspace = true }
+tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
+axum = { workspace = true, features = ["ws"] }
+opencrab-gateway = { workspace = true }
+dirs = "6"

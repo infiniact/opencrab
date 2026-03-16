@@ -1,0 +1,26 @@
+[gateway]
+host = "127.0.0.1"
+port = 18789
+auth_token = ""           # empty = loopback-only, no auth required
+
+[agent]
+provider = "openai"       # "openai" | "anthropic"
+model = "gpt-4o"
+api_key = "${OPENAI_API_KEY}"
+temperature = 0.7
+max_tokens = 4096
+system_prompt = "You are a helpful assistant."
+
+[channels.feishu]
+enabled = true
+app_id = ""
+app_secret = "${FEISHU_APP_SECRET}"
+encrypt_key = ""
+verification_token = "${FEISHU_VERIFICATION_TOKEN}"
+domain = "feishu"                  # "feishu" | "lark" | custom URL
+connection_mode = "websocket"      # "websocket" | "webhook"
+webhook_port = 3000
+require_mention = true             # group chats require @mention
+
+[logging]
+level = "info"                     # "trace" | "debug" | "info" | "warn" | "error"
